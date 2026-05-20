@@ -5,8 +5,10 @@ import { Eyebrow } from "@/components/site/SectionEyebrow";
 import { getRecipe, recipes } from "@/lib/recipes";
 import { Clock, Users, ChefHat, ArrowRight, ArrowLeft } from "lucide-react";
 
+import type { Recipe } from "@/lib/recipes";
+
 export const Route = createFileRoute("/receitas/$slug")({
-  loader: ({ params }) => {
+  loader: ({ params }): { recipe: Recipe } => {
     const r = getRecipe(params.slug);
     if (!r) throw notFound();
     return { recipe: r };
