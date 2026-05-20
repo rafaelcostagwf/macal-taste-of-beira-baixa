@@ -52,7 +52,6 @@ export function Header() {
               <Link
                 to={l.to}
                 activeProps={{ className: "text-[var(--color-gold)]" }}
-                activeOptions={{ exact: l.to === "/" }}
                 className="text-primary-foreground/85 hover:text-[var(--color-gold)] transition-colors"
               >
                 {l.label}
