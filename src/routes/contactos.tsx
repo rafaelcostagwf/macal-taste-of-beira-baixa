@@ -102,7 +102,22 @@ function ContactosPage() {
           </form>
         </div>
       </section>
+
+      <section className="py-24 bg-secondary">
+        <div className="mx-auto max-w-6xl px-6 grid lg:grid-cols-[1fr_1fr] gap-12 items-center">
+          <div>
+            <Eyebrow>Localizações</Eyebrow>
+            <h2 className="mt-4 font-display text-4xl lg:text-5xl">Onde estamos.</h2>
+            <p className="mt-5 text-muted-foreground max-w-md">
+              Duas unidades em Portugal continental — produção na Beira Baixa e centro logístico junto a Lisboa, para chegarmos rápido a todo o país.
+            </p>
+          </div>
+          <PortugalMap />
+        </div>
+      </section>
+
       <Footer />
+
     </main>
   );
 }
