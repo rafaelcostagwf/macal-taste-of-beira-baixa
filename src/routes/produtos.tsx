@@ -6,7 +6,7 @@ import { ArrowRight, Award } from "lucide-react";
 import pChar from "@/assets/product-charcutaria.jpg";
 import pLat from "@/assets/product-laticinios.jpg";
 import pPres from "@/assets/product-presunto.jpg";
-import hero2 from "@/assets/hero-2.jpg";
+import hero2 from "@/assets/conjunto-macal.png";
 
 export const Route = createFileRoute("/produtos")({
   component: ProdutosPage,

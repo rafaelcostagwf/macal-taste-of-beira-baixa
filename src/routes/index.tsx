@@ -7,11 +7,12 @@ import { Eyebrow } from "@/components/site/SectionEyebrow";
 import { recipes } from "@/lib/recipes";
 import hero1 from "@/assets/hero-charcutaria.jpg";
 import hero2 from "@/assets/hero-2.jpg";
-import hero3 from "@/assets/hero-3.jpg";
-import beira from "@/assets/about-beira.jpg";
+import hero3 from "@/assets/conjunto-macal.png";
+
 import pChar from "@/assets/product-charcutaria.jpg";
 import pLat from "@/assets/product-laticinios.jpg";
 import pPres from "@/assets/product-presunto.jpg";
+import conjunto from "@/assets/conjunto-macal.png";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -92,37 +93,61 @@ function HeroCarousel() {
 
 function FeatureCards() {
   const items = [
-    { icon: ShoppingBag, title: "Produtos", desc: "Enchidos, presuntos, fumados e queijos artesanais da Beira Baixa.", to: "/produtos" as const },
-    { icon: ChefHat, title: "Receitas", desc: "Pratos tradicionais portugueses com os produtos Macal.", to: "/receitas" as const },
-    { icon: Truck, title: "Onde comprar", desc: "Encontre Macal em supermercados, mercearias e restaurantes.", to: "/onde-comprar" as const },
+    { icon: ShoppingBag, title: "Produtos", desc: "Enchidos, presuntos, fumados e queijos artesanais da Beira Baixa.", to: "/produtos" as const, img: pChar, kicker: "Gama Macal" },
+    { icon: ChefHat, title: "Receitas", desc: "Pratos tradicionais portugueses com os produtos Macal.", to: "/receitas" as const, img: pPres, kicker: "Cozinha de tradição" },
+    { icon: Truck, title: "Onde comprar", desc: "Encontre Macal em supermercados, mercearias e restaurantes.", to: "/onde-comprar" as const, img: pLat, kicker: "Pontos de venda" },
   ];
   return (
-    <section className="py-20 lg:py-24 bg-[var(--color-cream)]">
-      <div className="mx-auto max-w-7xl px-6 grid md:grid-cols-3 gap-6">
-        {items.map((it) => (
-          <Link key={it.title} to={it.to} className="group relative overflow-hidden rounded-xl bg-card border border-border p-8 hover:shadow-2xl hover:-translate-y-1 transition-all duration-500">
-            <div className="absolute inset-x-0 -top-px h-1 bg-gradient-to-r from-accent via-[var(--color-gold)] to-accent opacity-0 group-hover:opacity-100 transition-opacity" />
-            <div className="size-14 rounded-full bg-[var(--color-gold)]/15 text-accent flex items-center justify-center">
-              <it.icon className="size-6" />
-            </div>
-            <h3 className="mt-5 font-display text-2xl">{it.title}</h3>
-            <p className="mt-2 text-muted-foreground">{it.desc}</p>
-            <span className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-accent">
-              Descobrir <ArrowRight className="size-4 group-hover:translate-x-1 transition-transform" />
-            </span>
-          </Link>
-        ))}
+    <section className="relative py-20 lg:py-28 bg-[var(--color-cream)] overflow-hidden">
+      <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: "radial-gradient(#0d1b3a 1px, transparent 1px)", backgroundSize: "22px 22px" }} />
+      <div className="absolute -top-24 -right-24 size-[420px] rounded-full bg-accent/10 blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-32 -left-32 size-[460px] rounded-full bg-[var(--color-gold)]/15 blur-3xl pointer-events-none" />
+
+      <div className="relative mx-auto max-w-7xl px-6">
+        <div className="text-center max-w-2xl mx-auto mb-14">
+          <Eyebrow>Descubra a Macal</Eyebrow>
+          <h2 className="mt-4 font-display text-4xl lg:text-5xl">Sabor, receitas e tradição<br />num só sítio.</h2>
+        </div>
+        <div className="grid md:grid-cols-3 gap-7">
+          {items.map((it, idx) => (
+            <Link
+              key={it.title}
+              to={it.to}
+              className="group relative block overflow-hidden rounded-2xl bg-card border border-border shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500"
+            >
+              <div className="relative h-56 overflow-hidden">
+                <img src={it.img} alt={it.title} className="absolute inset-0 h-full w-full object-cover group-hover:scale-110 transition-transform duration-[1400ms]" loading="lazy" width={800} height={600} />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent" />
+                <span className="absolute top-4 left-4 text-[10px] tracking-[0.3em] uppercase text-[var(--color-gold)] bg-primary/60 backdrop-blur px-3 py-1 rounded-full border border-[var(--color-gold)]/40">
+                  0{idx + 1} · {it.kicker}
+                </span>
+                <div className="absolute -bottom-7 left-7 size-14 rounded-full bg-accent text-accent-foreground flex items-center justify-center shadow-lg ring-4 ring-[var(--color-cream)]">
+                  <it.icon className="size-6" />
+                </div>
+              </div>
+              <div className="p-7 pt-10">
+                <h3 className="font-display text-2xl">{it.title}</h3>
+                <p className="mt-2 text-muted-foreground leading-relaxed">{it.desc}</p>
+                <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-accent group-hover:gap-3 transition-all">
+                  Descobrir <ArrowRight className="size-4" />
+                </span>
+              </div>
+              <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-accent via-[var(--color-gold)] to-accent scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-700" />
+            </Link>
+          ))}
+        </div>
       </div>
     </section>
   );
 }
+
 
 function HistorySection() {
   return (
     <section className="py-24 lg:py-32 bg-secondary">
       <div className="mx-auto max-w-7xl px-6 grid lg:grid-cols-2 gap-14 items-center">
         <div className="relative">
-          <img src={beira} alt="Beira Baixa" className="rounded-lg shadow-2xl w-full h-[560px] object-cover" loading="lazy" width={1600} height={1200} />
+          <img src={conjunto} alt="Gama Macal na Beira Baixa" className="rounded-lg shadow-2xl w-full h-[560px] object-cover" loading="lazy" width={1600} height={1200} />
           <div className="absolute -bottom-6 -right-6 hidden md:block bg-accent text-accent-foreground p-6 rounded-lg shadow-xl max-w-[200px]">
             <div className="font-display text-5xl leading-none">66+</div>
             <div className="mt-2 text-sm">Anos a encher enchidos na Beira Baixa</div>
