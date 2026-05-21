@@ -8,7 +8,7 @@ import { recipes } from "@/lib/recipes";
 import hero1 from "@/assets/hero-charcutaria.jpg";
 import hero2 from "@/assets/hero-2.jpg";
 import hero3 from "@/assets/conjunto-macal.png";
-import beira from "@/assets/about-beira.jpg";
+
 import pChar from "@/assets/product-charcutaria.jpg";
 import pLat from "@/assets/product-laticinios.jpg";
 import pPres from "@/assets/product-presunto.jpg";
