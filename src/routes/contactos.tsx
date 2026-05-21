@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { Eyebrow } from "@/components/site/SectionEyebrow";
+import { PortugalMap } from "@/components/site/PortugalMap";
 import { Mail, MapPin, Phone, Clock, Send } from "lucide-react";
 
 export const Route = createFileRoute("/contactos")({
