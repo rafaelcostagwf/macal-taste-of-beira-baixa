@@ -147,7 +147,7 @@ function HistorySection() {
     <section className="py-24 lg:py-32 bg-secondary">
       <div className="mx-auto max-w-7xl px-6 grid lg:grid-cols-2 gap-14 items-center">
         <div className="relative">
-          <img src={beira} alt="Beira Baixa" className="rounded-lg shadow-2xl w-full h-[560px] object-cover" loading="lazy" width={1600} height={1200} />
+          <img src={conjunto} alt="Gama Macal na Beira Baixa" className="rounded-lg shadow-2xl w-full h-[560px] object-cover" loading="lazy" width={1600} height={1200} />
           <div className="absolute -bottom-6 -right-6 hidden md:block bg-accent text-accent-foreground p-6 rounded-lg shadow-xl max-w-[200px]">
             <div className="font-display text-5xl leading-none">66+</div>
             <div className="mt-2 text-sm">Anos a encher enchidos na Beira Baixa</div>
