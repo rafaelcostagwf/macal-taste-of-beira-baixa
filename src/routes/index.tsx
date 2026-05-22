@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ChevronLeft, ChevronRight, ShoppingBag, ChefHat, Truck, Award, ArrowRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Award, ArrowRight } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { Eyebrow } from "@/components/site/SectionEyebrow";
