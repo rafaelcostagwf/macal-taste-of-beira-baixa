@@ -52,7 +52,7 @@ function HeroCarousel() {
       ))}
 
       {/* Bottom torn-paper accent */}
-      <div className="absolute bottom-0 left-0 right-0 h-20 bg-[var(--color-cream)]" style={{ clipPath: "polygon(0 100%, 100% 100%, 100% 40%, 92% 55%, 80% 30%, 65% 60%, 50% 35%, 35% 65%, 20% 40%, 8% 60%, 0 35%)" }} />
+      <div className="absolute bottom-0 left-0 right-0 h-20 bg-[var(--color-olive)]" style={{ clipPath: "polygon(0 100%, 100% 100%, 100% 40%, 92% 55%, 80% 30%, 65% 60%, 50% 35%, 35% 65%, 20% 40%, 8% 60%, 0 35%)" }} />
 
       <div className="relative z-10 mx-auto flex h-full max-w-7xl items-center px-6 pt-24">
         <div className="max-w-2xl">
