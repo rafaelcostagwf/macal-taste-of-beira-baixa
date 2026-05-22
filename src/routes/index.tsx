@@ -92,49 +92,56 @@ function HeroCarousel() {
 }
 
 function FeatureCards() {
-  const items = [
-    { icon: ShoppingBag, title: "Produtos", desc: "Enchidos, presuntos, fumados e queijos artesanais da Beira Baixa.", to: "/produtos" as const, img: pChar, kicker: "Gama Macal" },
-    { icon: ChefHat, title: "Receitas", desc: "Pratos tradicionais portugueses com os produtos Macal.", to: "/receitas" as const, img: pPres, kicker: "Cozinha de tradição" },
-    { icon: Truck, title: "Onde comprar", desc: "Encontre Macal em supermercados, mercearias e restaurantes.", to: "/onde-comprar" as const, img: pLat, kicker: "Pontos de venda" },
+  const cats = [
+    { img: conjunto, label: "Cabazes", to: "/produtos" as const },
+    { img: pChar, label: "Enchidos", to: "/produtos" as const },
+    { img: pPres, label: "Presuntos", to: "/produtos" as const },
+    { img: pLat, label: "Laticínios", to: "/produtos" as const },
+    { img: hero1, label: "Fumados", to: "/produtos" as const },
   ];
   return (
-    <section className="relative py-20 lg:py-28 bg-[var(--color-cream)] overflow-hidden">
-      <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: "radial-gradient(#0d1b3a 1px, transparent 1px)", backgroundSize: "22px 22px" }} />
-      <div className="absolute -top-24 -right-24 size-[420px] rounded-full bg-accent/10 blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-32 -left-32 size-[460px] rounded-full bg-[var(--color-gold)]/15 blur-3xl pointer-events-none" />
+    <section className="relative bg-[var(--color-olive)] pt-28 pb-24 lg:pb-32 overflow-hidden">
+      <div className="absolute inset-0 opacity-[0.07] pointer-events-none" style={{ backgroundImage: "radial-gradient(#0d1b3a 1px, transparent 1px)", backgroundSize: "22px 22px" }} />
+      <div className="absolute -top-10 -right-20 size-[380px] rounded-full bg-[var(--color-gold)]/20 blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-32 -left-32 size-[460px] rounded-full bg-accent/10 blur-3xl pointer-events-none" />
 
       <div className="relative mx-auto max-w-7xl px-6">
-        <div className="text-center max-w-2xl mx-auto mb-14">
-          <Eyebrow>Descubra a Macal</Eyebrow>
-          <h2 className="mt-4 font-display text-4xl lg:text-5xl">Sabor, receitas e tradição<br />num só sítio.</h2>
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <div className="flex justify-center mb-5" aria-hidden>
+            <svg width="86" height="22" viewBox="0 0 86 22" className="text-primary">
+              {[6, 20, 34, 48, 62, 76].map((x) => (
+                <path key={x} d={`M${x - 5} 20 L${x} 4 L${x + 5} 20 Z`} fill="currentColor" />
+              ))}
+            </svg>
+          </div>
+          <h2 className="font-display text-5xl lg:text-6xl text-primary-foreground/0 leading-[1.05]">
+            <span className="text-primary-foreground" style={{ color: "var(--color-cream)" }}>Os nossos</span>{" "}
+            <span className="text-primary font-semibold">Produtos</span>
+          </h2>
         </div>
-        <div className="grid md:grid-cols-3 gap-7">
-          {items.map((it, idx) => (
-            <Link
-              key={it.title}
-              to={it.to}
-              className="group relative block overflow-hidden rounded-2xl bg-card border border-border shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500"
-            >
-              <div className="relative h-56 overflow-hidden">
-                <img src={it.img} alt={it.title} className="absolute inset-0 h-full w-full object-cover group-hover:scale-110 transition-transform duration-[1400ms]" loading="lazy" width={800} height={600} />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent" />
-                <span className="absolute top-4 left-4 text-[10px] tracking-[0.3em] uppercase text-[var(--color-gold)] bg-primary/60 backdrop-blur px-3 py-1 rounded-full border border-[var(--color-gold)]/40">
-                  0{idx + 1} · {it.kicker}
-                </span>
-                <div className="absolute -bottom-7 left-7 size-14 rounded-full bg-accent text-accent-foreground flex items-center justify-center shadow-lg ring-4 ring-[var(--color-cream)]">
-                  <it.icon className="size-6" />
-                </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-6">
+          {cats.map((c, idx) => (
+            <Link key={c.label} to={c.to} className="group flex flex-col items-center text-center">
+              <div className="relative size-36 md:size-44 rounded-full overflow-hidden ring-4 ring-[var(--color-cream)]/30 group-hover:ring-[var(--color-gold)] transition-all duration-500 shadow-xl group-hover:-translate-y-2">
+                <img src={c.img} alt={c.label} className="absolute inset-0 h-full w-full object-cover group-hover:scale-110 transition-transform duration-[1200ms]" loading="lazy" width={400} height={400} />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent" />
+                <span className="absolute top-2 left-2 text-[9px] tracking-[0.25em] uppercase text-[var(--color-gold)] bg-primary/70 px-2 py-0.5 rounded-full">0{idx + 1}</span>
               </div>
-              <div className="p-7 pt-10">
-                <h3 className="font-display text-2xl">{it.title}</h3>
-                <p className="mt-2 text-muted-foreground leading-relaxed">{it.desc}</p>
-                <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-accent group-hover:gap-3 transition-all">
-                  Descobrir <ArrowRight className="size-4" />
-                </span>
-              </div>
-              <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-accent via-[var(--color-gold)] to-accent scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-700" />
+              <h3 className="mt-6 font-display text-xl md:text-2xl uppercase tracking-[0.15em] text-primary font-semibold group-hover:text-accent transition-colors">
+                {c.label}
+              </h3>
+              <span className="mt-2 inline-flex items-center gap-1 text-xs uppercase tracking-widest text-primary/60 opacity-0 group-hover:opacity-100 transition">
+                Ver <ArrowRight className="size-3" />
+              </span>
             </Link>
           ))}
+        </div>
+
+        <div className="mt-16 text-center">
+          <Link to="/produtos" className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-3.5 font-medium text-primary-foreground hover:bg-accent transition">
+            Ver toda a gama <ArrowRight className="size-4" />
+          </Link>
         </div>
       </div>
     </section>
