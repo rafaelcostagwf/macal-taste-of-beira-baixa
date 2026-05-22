@@ -1,56 +1,129 @@
 import { Link } from "@tanstack/react-router";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Facebook, Instagram, Youtube, Linkedin, Award } from "lucide-react";
 import logo from "@/assets/macal-logo.png";
 
 export function Footer() {
   return (
-    <footer className="bg-primary text-primary-foreground">
-      <div className="mx-auto max-w-7xl px-6 py-16 grid md:grid-cols-4 gap-10">
-        <div>
-          <img src={logo} alt="Macal" width={140} height={64} className="h-14 w-auto" />
-          <p className="mt-5 text-sm text-primary-foreground/70 leading-relaxed">
-            Charcutaria e laticínios tradicionais da Beira Baixa, desde 1958.
-            Mais de seis décadas de tradição e rigor artesanal.
-          </p>
-        </div>
-        <div>
-          <h4 className="font-display text-lg text-[var(--color-gold)]">Navegar</h4>
-          <ul className="mt-4 space-y-2 text-sm text-primary-foreground/80">
-            <li><Link to="/sobre" className="hover:text-[var(--color-gold)]">A Macal</Link></li>
-            <li><Link to="/produtos" className="hover:text-[var(--color-gold)]">Produtos</Link></li>
-            <li><Link to="/receitas" className="hover:text-[var(--color-gold)]">Receitas</Link></li>
-            <li><Link to="/onde-comprar" className="hover:text-[var(--color-gold)]">Onde comprar</Link></li>
-            <li><Link to="/contactos" className="hover:text-[var(--color-gold)]">Contactos</Link></li>
-          </ul>
-        </div>
-        <div>
-          <h4 className="font-display text-lg text-[var(--color-gold)]">Contactos</h4>
-          <ul className="mt-4 space-y-3 text-sm text-primary-foreground/80">
-            <li className="flex items-start gap-2"><MapPin className="size-4 mt-0.5 text-[var(--color-gold)]" /> Castelo Branco, Portugal</li>
-            <li className="flex items-start gap-2"><Mail className="size-4 mt-0.5 text-[var(--color-gold)]" /> geral@macal.pt</li>
-            <li className="flex items-start gap-2"><Phone className="size-4 mt-0.5 text-[var(--color-gold)]" /> +351 272 000 000</li>
-          </ul>
-        </div>
-        <div>
-          <h4 className="font-display text-lg text-[var(--color-gold)]">Newsletter</h4>
-          <p className="mt-4 text-sm text-primary-foreground/70">Receba novidades, eventos e receitas.</p>
-          <form onSubmit={(e) => e.preventDefault()} className="mt-4 flex">
-            <input
-              type="email"
-              required
-              placeholder="o.seu@email.pt"
-              className="flex-1 rounded-l-full bg-primary-foreground/10 border border-primary-foreground/20 px-4 py-2.5 text-sm outline-none focus:border-[var(--color-gold)] placeholder:text-primary-foreground/40"
-            />
-            <button className="rounded-r-full bg-accent px-5 py-2.5 text-xs uppercase tracking-widest text-accent-foreground hover:opacity-90 transition">
-              Subscrever
-            </button>
-          </form>
-        </div>
+    <footer className="relative bg-[var(--color-cream)] text-foreground">
+      {/* Torn paper top — dark navy peeling away to reveal cream */}
+      <div className="relative -mt-px">
+        <div
+          className="h-24 bg-primary"
+          style={{
+            clipPath:
+              "polygon(0 0, 100% 0, 100% 55%, 95% 70%, 88% 45%, 80% 75%, 72% 50%, 64% 80%, 55% 55%, 47% 78%, 38% 50%, 30% 72%, 22% 48%, 14% 75%, 6% 55%, 0 72%)",
+          }}
+        />
       </div>
-      <div className="border-t border-primary-foreground/10">
-        <div className="mx-auto max-w-7xl px-6 py-5 text-xs text-primary-foreground/55 flex flex-wrap justify-between gap-2">
-          <span>© {new Date().getFullYear()} Macal — Todos os direitos reservados.</span>
-          <span>Certificação IFS Food · HACCP</span>
+
+      <div className="relative">
+        <div className="mx-auto max-w-7xl px-6 pt-16 pb-10 grid lg:grid-cols-[1fr_1.2fr_1.2fr_1fr] gap-12">
+          {/* Logo */}
+          <div className="flex lg:justify-start justify-center">
+            <div className="text-center lg:text-left">
+              <img src={logo} alt="Macal" width={170} height={170} className="h-32 w-auto mx-auto lg:mx-0" />
+              <p className="mt-3 text-[11px] tracking-[0.35em] uppercase text-[var(--color-gold)] font-medium">
+                Desde 1958
+              </p>
+            </div>
+          </div>
+
+          {/* Contactos */}
+          <div>
+            <h4 className="font-display text-2xl font-semibold uppercase tracking-wide text-primary">
+              Contactos
+            </h4>
+            <div className="mt-6 space-y-3 text-[15px] leading-relaxed text-foreground/80">
+              <p>
+                Zona Industrial de Mação<br />
+                6120-396 Mação<br />
+                Portugal
+              </p>
+              <p>
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=Mação,+Portugal"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-[var(--color-gold)] underline-offset-4 hover:underline"
+                >
+                  [ ver no mapa ]
+                </a>
+              </p>
+              <p className="pt-2">+351 272 000 000 <sup className="text-xs">*</sup></p>
+              <p>
+                <a href="mailto:geral@macal.pt" className="hover:text-accent transition">
+                  geral@macal.pt
+                </a>
+              </p>
+            </div>
+          </div>
+
+          {/* Outras Informações */}
+          <div>
+            <h4 className="font-display text-2xl font-semibold uppercase tracking-wide text-primary">
+              Outras Informações
+            </h4>
+            <ul className="mt-6 space-y-2.5 text-[15px] text-foreground/80">
+              <li><Link to="/sobre" className="hover:text-accent transition">A Macal</Link></li>
+              <li><Link to="/produtos" className="hover:text-accent transition">Produtos</Link></li>
+              <li><Link to="/receitas" className="hover:text-accent transition">Receitas</Link></li>
+              <li><Link to="/onde-comprar" className="hover:text-accent transition">Onde comprar</Link></li>
+              <li><a href="#" className="hover:text-accent transition">Termos e condições</a></li>
+              <li><a href="#" className="hover:text-accent transition">Política de privacidade</a></li>
+            </ul>
+            <a
+              href="https://www.livroreclamacoes.pt/"
+              target="_blank"
+              rel="noreferrer"
+              className="mt-5 inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-4 py-2 text-xs uppercase tracking-widest hover:bg-accent transition"
+            >
+              Livro de Reclamações
+            </a>
+          </div>
+
+          {/* Siga-nos */}
+          <div>
+            <h4 className="font-display text-2xl font-semibold uppercase tracking-wide text-primary">
+              Siga-nos
+            </h4>
+            <div className="mt-6 flex gap-3">
+              {[
+                { Icon: Facebook, href: "#", label: "Facebook" },
+                { Icon: Instagram, href: "#", label: "Instagram" },
+                { Icon: Youtube, href: "#", label: "YouTube" },
+                { Icon: Linkedin, href: "#", label: "LinkedIn" },
+              ].map(({ Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  aria-label={label}
+                  className="size-11 rounded-full bg-foreground/10 hover:bg-accent hover:text-accent-foreground text-foreground flex items-center justify-center transition"
+                >
+                  <Icon className="size-5" />
+                </a>
+              ))}
+            </div>
+            <p className="mt-8 text-xs text-foreground/55 leading-relaxed">
+              <sup>*</sup> custo de chamada para a rede fixa nacional
+            </p>
+          </div>
+        </div>
+
+        {/* Certifications band */}
+        <div className="border-t border-foreground/10">
+          <div className="mx-auto max-w-7xl px-6 py-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-4 text-xs uppercase tracking-[0.25em] text-foreground/65">
+            {["IFS Food", "HACCP", "Portugal Sou Eu", "Origem Beira Baixa", "Controlo Veterinário"].map((it) => (
+              <span key={it} className="flex items-center gap-2">
+                <Award className="size-4 text-accent" /> {it}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="border-t border-foreground/10">
+          <div className="mx-auto max-w-7xl px-6 py-5 text-xs text-foreground/55 text-center">
+            © {new Date().getFullYear()} Macal — Todos os direitos reservados.
+          </div>
         </div>
       </div>
     </footer>

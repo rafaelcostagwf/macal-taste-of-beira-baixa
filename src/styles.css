@@ -46,6 +46,7 @@
   --color-gold: var(--gold);
   --color-cream: var(--cream);
   --color-ink: var(--ink);
+  --color-olive: var(--olive);
   --font-display: "Playfair Display", Georgia, serif;
   --font-sans: "Inter", system-ui, sans-serif;
 }
@@ -79,6 +80,7 @@
   --destructive-foreground: oklch(0.98 0.005 80);
 
   --gold: oklch(0.72 0.12 80);                     /* aged gold */
+  --olive: oklch(0.78 0.05 105);                   /* warm sage/olive */
 
   --border: oklch(0.88 0.015 75);
   --input: oklch(0.88 0.015 75);
