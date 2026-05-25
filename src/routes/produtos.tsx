@@ -1,15 +1,20 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { Eyebrow } from "@/components/site/SectionEyebrow";
-import { ArrowRight, Award } from "lucide-react";
-import pChar from "@/assets/product-charcutaria.jpg";
-import pLat from "@/assets/product-laticinios.jpg";
-import pPres from "@/assets/product-presunto.jpg";
+import { ArrowRight } from "lucide-react";
 import hero2 from "@/assets/conjunto-macal.png";
+import { categories, products, type ProductCategory } from "@/lib/products";
+import { z } from "zod";
+import { zodValidator } from "@tanstack/zod-adapter";
+
+const searchSchema = z.object({
+  cat: z.enum(["todos", "enchidos", "presuntos", "laticinios", "fumados", "cabazes"]).optional().default("todos"),
+});
 
 export const Route = createFileRoute("/produtos")({
   component: ProdutosPage,
+  validateSearch: zodValidator(searchSchema),
   head: () => ({
     meta: [
       { title: "Produtos Macal — Charcutaria, presuntos e laticínios" },
@@ -21,34 +26,12 @@ export const Route = createFileRoute("/produtos")({
   }),
 });
 
-const gamas = [
-  {
-    id: "charcutaria",
-    img: pChar,
-    tag: "Gama Charcutaria",
-    title: "Enchidos curados",
-    desc: "Chouriço de carne, linguiça, salpicão, morcela, farinheira — fumeiro tradicional da Beira Baixa, com cura lenta a fumo de lenha.",
-    items: ["Chouriço de carne", "Linguiça", "Salpicão", "Morcela", "Farinheira", "Chouriço de cebola"],
-  },
-  {
-    id: "presunto",
-    img: pPres,
-    tag: "Gama Presuntos",
-    title: "Presunto curado",
-    desc: "Curado naturalmente durante meses, com o sabor profundo que só o tempo dá. Disponível em peça inteira, fatiado ou em taco.",
-    items: ["Presunto peça inteira", "Presunto fatiado", "Presunto em taco", "Paleta curada"],
-  },
-  {
-    id: "laticinios",
-    img: pLat,
-    tag: "Gama Laticínios",
-    title: "Queijos artesanais",
-    desc: "Queijos de ovelha e mistura, de pastas amanteigadas a curas intensas. Produção artesanal com leite da região.",
-    items: ["Queijo de ovelha amanteigado", "Queijo curado de mistura", "Queijo fresco", "Requeijão"],
-  },
-];
-
 function ProdutosPage() {
+  const { cat } = Route.useSearch();
+  const navigate = useNavigate();
+
+  const filtered = cat === "todos" ? products : products.filter((p) => p.category === (cat as ProductCategory));
+
   return (
     <main className="bg-background text-foreground">
       <Header />
@@ -62,31 +45,59 @@ function ProdutosPage() {
         </div>
       </section>
 
-      {gamas.map((g, idx) => (
-        <section key={g.id} id={g.id} className={`py-24 lg:py-32 ${idx % 2 ? "bg-secondary" : ""}`}>
-          <div className={`mx-auto max-w-7xl px-6 grid lg:grid-cols-2 gap-14 items-center ${idx % 2 ? "lg:[&>*:first-child]:order-2" : ""}`}>
-            <div className="relative group overflow-hidden rounded-xl">
-              <img src={g.img} alt={g.title} className="w-full h-[520px] object-cover group-hover:scale-105 transition-transform duration-[1200ms]" loading="lazy" width={1024} height={1280} />
-              <div className="absolute top-5 left-5 bg-accent text-accent-foreground text-[11px] tracking-[0.25em] uppercase px-4 py-1.5 rounded-full">{g.tag}</div>
-            </div>
-            <div>
-              <Eyebrow>{g.tag}</Eyebrow>
-              <h2 className="mt-4 font-display text-4xl lg:text-5xl">{g.title}</h2>
-              <p className="mt-5 text-lg text-muted-foreground leading-relaxed">{g.desc}</p>
-              <ul className="mt-7 grid sm:grid-cols-2 gap-3">
-                {g.items.map((it) => (
-                  <li key={it} className="flex items-center gap-3 text-foreground">
-                    <Award className="size-4 text-accent" /> {it}
-                  </li>
-                ))}
-              </ul>
-              <Link to="/contactos" className="mt-9 inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 font-medium text-primary-foreground hover:opacity-90 transition">
-                Pedir catálogo <ArrowRight className="size-4" />
-              </Link>
-            </div>
+      {/* Brand block + filters */}
+      <section className="py-16 bg-background">
+        <div className="mx-auto max-w-7xl px-6 text-center">
+          <p className="font-display text-5xl text-accent">Macal</p>
+          <p className="mt-1 tracking-[0.4em] text-sm text-muted-foreground uppercase">Clássicos</p>
+
+          <div className="mt-10 flex flex-wrap justify-center gap-2 md:gap-1">
+            {categories.map((c) => {
+              const active = (cat ?? "todos") === c.id;
+              return (
+                <button
+                  key={c.id}
+                  onClick={() => navigate({ to: "/produtos", search: { cat: c.id } })}
+                  className={`px-5 md:px-7 py-3 text-sm md:text-base font-medium rounded-md transition border-2 ${
+                    active ? "border-accent text-accent" : "border-transparent text-foreground hover:text-accent"
+                  }`}
+                >
+                  {c.label}
+                </button>
+              );
+            })}
           </div>
-        </section>
-      ))}
+        </div>
+      </section>
+
+      {/* Product grid Nobre-style */}
+      <section className="bg-[#7a1a1a]">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            {filtered.map((p) => (
+              <Link
+                key={p.slug}
+                to="/produtos/$slug"
+                params={{ slug: p.slug }}
+                className="group relative aspect-square flex items-center justify-center p-6 md:p-10 border border-white/5 hover:bg-white/5 transition"
+              >
+                <img
+                  src={p.image}
+                  alt={p.name}
+                  className="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-110 drop-shadow-2xl"
+                  loading="lazy"
+                />
+                <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition">
+                  <p className="text-white font-medium text-sm">{p.name}</p>
+                </div>
+              </Link>
+            ))}
+            {filtered.length === 0 && (
+              <p className="col-span-full text-center text-white/70 py-20">Sem produtos nesta categoria.</p>
+            )}
+          </div>
+        </div>
+      </section>
 
       <section className="py-20 bg-primary text-primary-foreground text-center">
         <div className="mx-auto max-w-3xl px-6">
