@@ -5,16 +5,15 @@ import { Eyebrow } from "@/components/site/SectionEyebrow";
 import { ArrowRight } from "lucide-react";
 import hero2 from "@/assets/conjunto-macal.png";
 import { categories, products, type ProductCategory } from "@/lib/products";
-import { z } from "zod";
-import { zodValidator } from "@tanstack/zod-adapter";
 
-const searchSchema = z.object({
-  cat: z.enum(["todos", "enchidos", "presuntos", "laticinios", "fumados", "cabazes"]).optional().default("todos"),
-});
+type CatSearch = "todos" | ProductCategory;
+const validCats: CatSearch[] = ["todos", "enchidos", "presuntos", "laticinios", "fumados", "cabazes"];
 
 export const Route = createFileRoute("/produtos")({
   component: ProdutosPage,
-  validateSearch: zodValidator(searchSchema),
+  validateSearch: (search: Record<string, unknown>): { cat: CatSearch } => ({
+    cat: validCats.includes(search.cat as CatSearch) ? (search.cat as CatSearch) : "todos",
+  }),
   head: () => ({
     meta: [
       { title: "Produtos Macal — Charcutaria, presuntos e laticínios" },
