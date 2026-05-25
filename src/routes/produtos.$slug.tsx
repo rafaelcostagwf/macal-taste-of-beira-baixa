@@ -110,7 +110,7 @@ function ProductDetailPage() {
             <div className="mt-6 rounded-xl border border-border overflow-hidden bg-card">
               <table className="w-full text-sm">
                 <tbody>
-                  {product.nutritional.map((row, i) => (
+                  {product.nutritional.map((row: { label: string; value: string }, i: number) => (
                     <tr key={row.label} className={i % 2 ? "bg-secondary/50" : ""}>
                       <td className="px-5 py-3 text-foreground/80">{row.label}</td>
                       <td className="px-5 py-3 text-right font-medium">{row.value}</td>
