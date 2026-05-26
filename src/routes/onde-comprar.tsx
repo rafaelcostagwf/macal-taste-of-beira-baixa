@@ -4,6 +4,13 @@ import { Footer } from "@/components/site/Footer";
 import { Eyebrow } from "@/components/site/SectionEyebrow";
 import { Store, ShoppingCart, Utensils, ArrowRight } from "lucide-react";
 import oliveirasBg from "@/assets/oliveiras-bg.jpg";
+import logoMercadona from "@/assets/logos/mercadona.png";
+import logoCorteIngles from "@/assets/logos/corte-ingles.png";
+import logoAuchan from "@/assets/logos/auchan.png";
+import logoIntermarche from "@/assets/logos/intermarche.png";
+import logoPingoDoce from "@/assets/logos/pingo-doce.png";
+import logoMinipreco from "@/assets/logos/minipreco.png";
+import logoLidl from "@/assets/logos/lidl.png";
 
 export const Route = createFileRoute("/onde-comprar")({
   component: OndeComprarPage,
@@ -19,14 +26,13 @@ export const Route = createFileRoute("/onde-comprar")({
 });
 
 const lojas = [
-  { name: "Continente", color: "#d4111e" },
-  { name: "Pingo Doce", color: "#00833e" },
-  { name: "Auchan", color: "#e2001a" },
-  { name: "Intermarché", color: "#e30613" },
-  { name: "Lidl", color: "#0050aa" },
-  { name: "Minipreço", color: "#e30613" },
-  { name: "El Corte Inglés", color: "#0a6e3a" },
-  { name: "Mercadona", color: "#008a3d" },
+  { name: "Pingo Doce", logo: logoPingoDoce },
+  { name: "Auchan", logo: logoAuchan },
+  { name: "Intermarché", logo: logoIntermarche },
+  { name: "Lidl", logo: logoLidl },
+  { name: "Minipreço", logo: logoMinipreco },
+  { name: "El Corte Inglés", logo: logoCorteIngles },
+  { name: "Mercadona", logo: logoMercadona },
 ];
 
 function OndeComprarPage() {
@@ -37,9 +43,10 @@ function OndeComprarPage() {
   ];
   const regioes = ["Lisboa & Vale do Tejo", "Norte", "Centro", "Alentejo", "Algarve", "Madeira", "Açores"];
 
+  const marqueeLogos = [...lojas, ...lojas];
+
   return (
     <main className="relative bg-background text-foreground">
-      {/* Olive grove background */}
       <div
         className="pointer-events-none fixed inset-0 -z-0 bg-cover bg-center opacity-15"
         style={{ backgroundImage: `url(${oliveirasBg})` }}
@@ -57,24 +64,27 @@ function OndeComprarPage() {
           </div>
         </section>
 
-        {/* Logo strip — static, no rotation */}
+        {/* Logo carousel — rotating marquee */}
         <section className="py-14 bg-card/80 backdrop-blur border-y border-border">
           <div className="mx-auto max-w-7xl px-6">
             <p className="text-center text-xs uppercase tracking-[0.3em] text-muted-foreground">Disponível em</p>
-            <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4">
-              {lojas.map((l) => (
-                <div
-                  key={l.name}
-                  className="aspect-[3/2] rounded-lg bg-background border border-border flex items-center justify-center px-3 hover:shadow-md hover:-translate-y-0.5 transition"
-                >
-                  <span
-                    className="font-display text-base md:text-lg font-bold text-center leading-tight"
-                    style={{ color: l.color }}
+            <div className="mt-8 overflow-hidden marquee-mask">
+              <div className="flex w-max gap-12 animate-marquee">
+                {marqueeLogos.map((l, i) => (
+                  <div
+                    key={`${l.name}-${i}`}
+                    className="shrink-0 h-20 w-44 flex items-center justify-center px-4"
+                    title={l.name}
                   >
-                    {l.name}
-                  </span>
-                </div>
-              ))}
+                    <img
+                      src={l.logo}
+                      alt={l.name}
+                      className="max-h-full max-w-full object-contain"
+                      loading="lazy"
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
