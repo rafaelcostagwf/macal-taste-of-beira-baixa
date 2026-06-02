@@ -197,9 +197,7 @@ function FeatureCards() {
     </section>
   );
 }
-    </section>
-  );
-}
+
 
 
 function HistorySection() {
