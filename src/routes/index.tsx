@@ -1,13 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { ChevronLeft, ChevronRight, Award, ArrowRight } from "lucide-react";
+import { Award, ArrowRight } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { Eyebrow } from "@/components/site/SectionEyebrow";
 import { recipes } from "@/lib/recipes";
 import hero1 from "@/assets/hero-charcutaria.jpg";
-import hero2 from "@/assets/hero-2.jpg";
 import hero3 from "@/assets/conjunto-macal.png";
+import salsichas from "@/assets/products/salsichas-criola.png";
 
 import pChar from "@/assets/product-charcutaria.jpg";
 import pLat from "@/assets/product-laticinios.jpg";
