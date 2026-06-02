@@ -1,13 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { ChevronLeft, ChevronRight, Award, ArrowRight } from "lucide-react";
+import { Award, ArrowRight } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { Eyebrow } from "@/components/site/SectionEyebrow";
 import { recipes } from "@/lib/recipes";
 import hero1 from "@/assets/hero-charcutaria.jpg";
-import hero2 from "@/assets/hero-2.jpg";
 import hero3 from "@/assets/conjunto-macal.png";
+import salsichas from "@/assets/products/salsichas-criola.png";
 
 import pChar from "@/assets/product-charcutaria.jpg";
 import pLat from "@/assets/product-laticinios.jpg";
@@ -27,65 +26,89 @@ export const Route = createFileRoute("/")({
   }),
 });
 
-const slides = [
-  { img: hero1, kicker: "Desde 1958", title: "O sabor autêntico da Beira Baixa", sub: "Charcutaria e laticínios feitos com os métodos de sempre." },
-  { img: hero2, kicker: "Mesa portuguesa", title: "Tradição que se sente em cada fatia", sub: "Enchidos curados naturalmente para a sua mesa." },
-  { img: hero3, kicker: "Fumeiro artesanal", title: "Quatro gerações de fumeiro", sub: "Cura lenta. Lume baixo. Tempo a sério." },
-];
-
 function HeroCarousel() {
-  const [i, setI] = useState(0);
-  useEffect(() => {
-    const t = setInterval(() => setI((p) => (p + 1) % slides.length), 6500);
-    return () => clearInterval(t);
-  }, []);
   return (
-    <section className="relative h-[100svh] min-h-[640px] w-full overflow-hidden text-primary-foreground">
-      {slides.map((s, idx) => (
-        <div
-          key={idx}
-          className={`absolute inset-0 transition-opacity duration-[1400ms] ease-in-out ${i === idx ? "opacity-100" : "opacity-0"}`}
+    <section className="relative w-full overflow-hidden bg-primary text-primary-foreground">
+      {/* Top food strip */}
+      <div className="relative h-[28svh] min-h-[180px] max-h-[320px] w-full">
+        <img
+          src={hero1}
+          alt="Charcutaria Macal"
+          className="absolute inset-0 h-full w-full object-cover"
+          width={1920}
+          height={600}
+        />
+        {/* Brush / torn transition into the navy section below */}
+        <svg
+          aria-hidden
+          viewBox="0 0 1440 120"
+          preserveAspectRatio="none"
+          className="absolute -bottom-px left-0 right-0 h-[90px] w-full"
         >
-          <img src={s.img} alt="" className="absolute inset-0 h-full w-full object-cover scale-105" width={1920} height={1080} />
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/85 via-primary/55 to-primary/20" />
-        </div>
-      ))}
+          <path
+            d="M0,60 C90,110 180,20 270,55 C360,90 450,30 540,60 C640,95 720,25 820,60 C920,95 1010,30 1110,65 C1210,100 1310,40 1440,70 L1440,120 L0,120 Z"
+            fill="var(--primary)"
+          />
+          <path
+            d="M0,75 C100,55 200,100 320,80 C440,60 540,105 660,85 C780,65 880,110 1000,90 C1120,70 1240,105 1440,85 L1440,120 L0,120 Z"
+            fill="var(--primary)"
+            opacity="0.7"
+          />
+        </svg>
+      </div>
 
-      {/* Bottom torn-paper accent */}
-      <div className="absolute bottom-0 left-0 right-0 h-20 bg-[var(--color-olive)]" style={{ clipPath: "polygon(0 100%, 100% 100%, 100% 40%, 92% 55%, 80% 30%, 65% 60%, 50% 35%, 35% 65%, 20% 40%, 8% 60%, 0 35%)" }} />
+      {/* Navy content section */}
+      <div className="relative min-h-[640px] pt-10 pb-24 lg:pb-32">
+        <div className="absolute inset-0 opacity-[0.06] pointer-events-none" style={{ backgroundImage: "radial-gradient(var(--color-gold) 1px, transparent 1px)", backgroundSize: "26px 26px" }} />
 
-      <div className="relative z-10 mx-auto flex h-full max-w-7xl items-center px-6 pt-24">
-        <div className="max-w-2xl">
-          <span className="inline-flex items-center gap-2 rounded-full border border-[var(--color-gold)]/60 bg-primary/40 backdrop-blur px-4 py-1.5 text-[11px] tracking-[0.3em] uppercase text-[var(--color-gold)]">
-            <Award className="size-3.5" /> {slides[i].kicker} · IFS Food
-          </span>
-          <h1 className="mt-6 font-display text-5xl sm:text-6xl lg:text-7xl font-semibold leading-[1.04] drop-shadow-md">
-            {slides[i].title}
-          </h1>
-          <p className="mt-5 max-w-xl text-lg text-primary-foreground/90 leading-relaxed">{slides[i].sub}</p>
-          <div className="mt-9 flex flex-wrap gap-3">
-            <Link to="/produtos" className="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 font-medium text-accent-foreground hover:opacity-90 transition">
-              Ver produtos <ArrowRight className="size-4" />
-            </Link>
-            <Link to="/receitas" className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/40 bg-primary/20 backdrop-blur px-7 py-3.5 font-medium hover:bg-primary-foreground/10 transition">
-              Receitas Macal
-            </Link>
+        <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-6 lg:grid-cols-2">
+          <div className="max-w-2xl">
+            <div aria-hidden className="mb-5 flex gap-1.5 text-[var(--color-gold)]">
+              {Array.from({ length: 6 }).map((_, k) => (
+                <svg key={k} width="14" height="18" viewBox="0 0 14 18" fill="currentColor">
+                  <path d="M7 0 C10 5 13 8 13 12 A6 6 0 0 1 1 12 C1 8 4 5 7 0 Z" />
+                </svg>
+              ))}
+            </div>
+
+            <span className="inline-flex items-center gap-2 rounded-full border border-[var(--color-gold)]/60 bg-primary-foreground/5 backdrop-blur px-4 py-1.5 text-[11px] tracking-[0.3em] uppercase text-[var(--color-gold)]">
+              <Award className="size-3.5" /> Desde 1958 · IFS Food
+            </span>
+
+            <h1 className="mt-6 font-display text-5xl sm:text-6xl lg:text-7xl font-semibold leading-[1.04] uppercase drop-shadow-md">
+              O sabor autêntico<br />da Beira Baixa
+            </h1>
+
+            <p className="mt-6 max-w-xl text-lg uppercase tracking-wide text-[var(--color-gold)]/90">
+              A Macal conta com quatro gerações de sabor e tradição.
+            </p>
+
+            <p className="mt-5 max-w-xl text-base text-primary-foreground/85 leading-relaxed">
+              Charcutaria e laticínios feitos com os métodos de sempre — cura lenta, lume baixo e tempo a sério. Uma família que há mais de 60 anos leva a Beira Baixa à sua mesa.
+            </p>
+
+            <div className="mt-9 flex flex-wrap gap-3">
+              <Link to="/sobre" className="inline-flex items-center gap-2 rounded-sm bg-primary-foreground px-8 py-3.5 font-medium uppercase tracking-[0.2em] text-sm text-primary hover:bg-[var(--color-gold)] hover:text-primary transition">
+                Saber mais
+              </Link>
+              <Link to="/produtos" className="inline-flex items-center gap-2 rounded-sm border border-primary-foreground/40 px-8 py-3.5 font-medium uppercase tracking-[0.2em] text-sm hover:bg-primary-foreground/10 transition">
+                Ver produtos <ArrowRight className="size-4" />
+              </Link>
+            </div>
+          </div>
+
+          {/* Product */}
+          <div className="relative flex items-center justify-center">
+            <div className="absolute inset-0 -z-0 mx-auto h-[420px] w-[420px] rounded-full bg-[var(--color-gold)]/10 blur-3xl" />
+            <img
+              src={salsichas}
+              alt="Salsichas Criola Macal"
+              className="relative z-10 max-h-[520px] w-auto object-contain drop-shadow-[0_30px_40px_rgba(0,0,0,0.5)]"
+              width={800}
+              height={800}
+            />
           </div>
         </div>
-      </div>
-
-      <div className="absolute bottom-32 right-6 z-10 hidden md:flex items-center gap-2">
-        <button onClick={() => setI((p) => (p - 1 + slides.length) % slides.length)} aria-label="Anterior" className="size-11 rounded-full border border-primary-foreground/40 bg-primary/30 backdrop-blur hover:bg-primary/60 transition flex items-center justify-center">
-          <ChevronLeft className="size-5" />
-        </button>
-        <button onClick={() => setI((p) => (p + 1) % slides.length)} aria-label="Próximo" className="size-11 rounded-full border border-primary-foreground/40 bg-primary/30 backdrop-blur hover:bg-primary/60 transition flex items-center justify-center">
-          <ChevronRight className="size-5" />
-        </button>
-      </div>
-      <div className="absolute bottom-32 left-6 z-10 flex gap-2">
-        {slides.map((_, idx) => (
-          <button key={idx} onClick={() => setI(idx)} aria-label={`Slide ${idx + 1}`} className={`h-1.5 rounded-full transition-all ${i === idx ? "w-10 bg-[var(--color-gold)]" : "w-5 bg-primary-foreground/40"}`} />
-        ))}
       </div>
     </section>
   );
