@@ -113,7 +113,6 @@ function HeroCarousel() {
     </section>
   );
 }
-}
 
 function FeatureCards() {
   const cats = [
