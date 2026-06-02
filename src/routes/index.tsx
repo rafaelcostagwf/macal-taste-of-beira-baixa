@@ -101,50 +101,102 @@ function FeatureCards() {
     { img: hero1, label: "Fumados", to: "/produtos" as const },
   ];
   return (
-    <section className="relative bg-[var(--color-olive)] pt-28 pb-24 lg:pb-32 overflow-hidden">
-      <div className="absolute inset-0 opacity-[0.07] pointer-events-none" style={{ backgroundImage: "radial-gradient(#0d1b3a 1px, transparent 1px)", backgroundSize: "22px 22px" }} />
-      <div className="absolute -top-10 -right-20 size-[380px] rounded-full bg-[var(--color-gold)]/20 blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-32 -left-32 size-[460px] rounded-full bg-accent/10 blur-3xl pointer-events-none" />
+    <section className="relative w-full overflow-hidden bg-primary text-primary-foreground">
+      {/* Top food strip */}
+      <div className="relative h-[26svh] min-h-[180px] max-h-[300px] w-full">
+        <img
+          src={hero1}
+          alt="Charcutaria Macal"
+          className="absolute inset-0 h-full w-full object-cover"
+          width={1920}
+          height={600}
+        />
+        {/* Brush / torn transition into the navy section below */}
+        <svg
+          aria-hidden
+          viewBox="0 0 1440 120"
+          preserveAspectRatio="none"
+          className="absolute -bottom-px left-0 right-0 h-[90px] w-full"
+        >
+          <path
+            d="M0,60 C90,110 180,20 270,55 C360,90 450,30 540,60 C640,95 720,25 820,60 C920,95 1010,30 1110,65 C1210,100 1310,40 1440,70 L1440,120 L0,120 Z"
+            fill="var(--primary)"
+          />
+          <path
+            d="M0,75 C100,55 200,100 320,80 C440,60 540,105 660,85 C780,65 880,110 1000,90 C1120,70 1240,105 1440,85 L1440,120 L0,120 Z"
+            fill="var(--primary)"
+            opacity="0.7"
+          />
+        </svg>
+      </div>
 
-      <div className="relative mx-auto max-w-7xl px-6">
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="flex justify-center mb-5" aria-hidden>
-            <svg width="86" height="22" viewBox="0 0 86 22" className="text-primary">
-              {[6, 20, 34, 48, 62, 76].map((x) => (
-                <path key={x} d={`M${x - 5} 20 L${x} 4 L${x + 5} 20 Z`} fill="currentColor" />
+      {/* Navy content section */}
+      <div className="relative pt-8 pb-24 lg:pb-32">
+        <div className="absolute inset-0 opacity-[0.06] pointer-events-none" style={{ backgroundImage: "radial-gradient(var(--color-gold) 1px, transparent 1px)", backgroundSize: "26px 26px" }} />
+
+        <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-6 lg:grid-cols-2">
+          <div className="max-w-2xl">
+            <div aria-hidden className="mb-5 flex gap-1.5 text-[var(--color-gold)]">
+              {Array.from({ length: 6 }).map((_, k) => (
+                <svg key={k} width="14" height="18" viewBox="0 0 14 18" fill="currentColor">
+                  <path d="M7 0 C10 5 13 8 13 12 A6 6 0 0 1 1 12 C1 8 4 5 7 0 Z" />
+                </svg>
               ))}
-            </svg>
+            </div>
+
+            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.05] uppercase">
+              Os nossos<br />Produtos
+            </h2>
+
+            <p className="mt-6 max-w-xl text-base sm:text-lg uppercase tracking-wide text-[var(--color-gold)]/90">
+              Quatro gerações de sabor e tradição da Beira Baixa.
+            </p>
+
+            <p className="mt-5 max-w-xl text-base text-primary-foreground/85 leading-relaxed">
+              Enchidos, presuntos, fumados e laticínios feitos com os métodos de sempre — cura lenta, lume baixo e tempo a sério. Descubra toda a gama Macal.
+            </p>
+
+            <div className="mt-9 flex flex-wrap gap-3">
+              <Link to="/produtos" className="inline-flex items-center gap-2 rounded-sm bg-primary-foreground px-8 py-3.5 font-medium uppercase tracking-[0.2em] text-sm text-primary hover:bg-[var(--color-gold)] hover:text-primary transition">
+                Ver gama completa
+              </Link>
+            </div>
           </div>
-          <h2 className="font-display text-5xl lg:text-6xl text-primary-foreground/0 leading-[1.05]">
-            <span className="text-primary-foreground" style={{ color: "var(--color-cream)" }}>Os nossos</span>{" "}
-            <span className="text-primary font-semibold">Produtos</span>
-          </h2>
+
+          {/* Product */}
+          <div className="relative flex items-center justify-center">
+            <div className="absolute inset-0 -z-0 mx-auto h-[420px] w-[420px] rounded-full bg-[var(--color-gold)]/10 blur-3xl" />
+            <img
+              src={salsichas}
+              alt="Salsichas Criola Macal"
+              className="relative z-10 max-h-[480px] w-auto object-contain drop-shadow-[0_30px_40px_rgba(0,0,0,0.5)]"
+              width={800}
+              height={800}
+            />
+          </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-6">
-          {cats.map((c, idx) => (
-            <Link key={c.label} to={c.to} className="group flex flex-col items-center text-center">
-              <div className="relative size-36 md:size-44 rounded-full overflow-hidden ring-4 ring-[var(--color-cream)]/30 group-hover:ring-[var(--color-gold)] transition-all duration-500 shadow-xl group-hover:-translate-y-2">
-                <img src={c.img} alt={c.label} className="absolute inset-0 h-full w-full object-cover group-hover:scale-110 transition-transform duration-[1200ms]" loading="lazy" width={400} height={400} />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent" />
-                <span className="absolute top-2 left-2 text-[9px] tracking-[0.25em] uppercase text-[var(--color-gold)] bg-primary/70 px-2 py-0.5 rounded-full">0{idx + 1}</span>
-              </div>
-              <h3 className="mt-6 font-display text-xl md:text-2xl uppercase tracking-[0.15em] text-primary font-semibold group-hover:text-accent transition-colors">
-                {c.label}
-              </h3>
-              <span className="mt-2 inline-flex items-center gap-1 text-xs uppercase tracking-widest text-primary/60 opacity-0 group-hover:opacity-100 transition">
-                Ver <ArrowRight className="size-3" />
-              </span>
-            </Link>
-          ))}
-        </div>
-
-        <div className="mt-16 text-center">
-          <Link to="/produtos" className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-3.5 font-medium text-primary-foreground hover:bg-accent transition">
-            Ver toda a gama <ArrowRight className="size-4" />
-          </Link>
+        {/* Category circles */}
+        <div className="relative mx-auto mt-20 max-w-7xl px-6">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-6">
+            {cats.map((c, idx) => (
+              <Link key={c.label} to={c.to} className="group flex flex-col items-center text-center">
+                <div className="relative size-32 md:size-40 rounded-full overflow-hidden ring-4 ring-primary-foreground/15 group-hover:ring-[var(--color-gold)] transition-all duration-500 shadow-xl group-hover:-translate-y-2">
+                  <img src={c.img} alt={c.label} className="absolute inset-0 h-full w-full object-cover group-hover:scale-110 transition-transform duration-[1200ms]" loading="lazy" width={400} height={400} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent" />
+                  <span className="absolute top-2 left-2 text-[9px] tracking-[0.25em] uppercase text-[var(--color-gold)] bg-primary/70 px-2 py-0.5 rounded-full">0{idx + 1}</span>
+                </div>
+                <h3 className="mt-5 font-display text-lg md:text-xl uppercase tracking-[0.15em] text-primary-foreground group-hover:text-[var(--color-gold)] transition-colors">
+                  {c.label}
+                </h3>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
+    </section>
+  );
+}
     </section>
   );
 }
